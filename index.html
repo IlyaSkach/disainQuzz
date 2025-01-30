@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Чат-Квиз</title>
+	<link rel="stylesheet" href="styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<header>
+		<div class="logo">
+			<img src="./img/logo.svg" alt="logo">
+		</div>
+		<h1 class="title">МИСТЕЦТВО АРХІТЕКТУРИ ТА ДИЗАЙНУ ІНТЕР'ЄРІВ</h1>
+		<h2 class="subtitle">Дизайн інтер'єру та ремонт під ключ в Києві та Дніпрі</h2>
+		<div class="promo">
+			<p>Гарантія на ремонт 2 роки</p>
+			<p>Вигідні ціни на матеріали</p>
+			<p>Дотримання строків прописано в договорі</p>
+		</div>
+	</header>
+
+	<!-- Начальный экран -->
+	<div class="start-screen">
+		<div class="text-container">
+			<h1>Дізнайся який інтер'єр вам підійде виходячи з архетипу особистості + отримаєте персональну добірку для
+				натхнення</h1>
+			<p class="text-start">Дайте відповідь лише на 5 запитань</p>
+		</div>
+		<img src="./img/home.jpg" alt="img start screen">
+		<button class="start-button" onclick="startQuiz()">Начать квиз</button>
+	</div>
+
+	<!-- Экран квиза (скрыт по умолчанию) -->
+	<div class="quiz-screen" style="display: none;">
+	<!-- Блок с аватаром, кнопкой звонка и прогресс-баром -->
+<div class="header-block">
+	<div class="sidebar">
+			<div class="avatar operator-avatar">
+					<img src="./img/olga.gif" alt="avatar">
+			</div>
+			<button class="call-button" onclick="window.location.href='tel:+1234567890'" style="display: none;">Позвонить</button>
+	</div>
+	<div class="welcome-text" style="display: none;">
+			Здравствуйте, меня зовут Ольга! Начнем квиз?
+	</div>
+	<div class="progress-bar">
+			<div class="progress"></div>
+	</div>
+</div>
+
+		<main>
+			<div class="chat">
+				<!-- Начальный вопрос (скрыт по умолчанию) -->
+				<div class="chat-message operator" id="question-1" style="display: none;">
+					<div class="avatar operator-avatar">
+						<img src="./img/olga.gif" alt="avatar">
+					</div>
+					<div class="message">Для чого вам потрібен дизайн-проект</div>
+					<div class="options">
+						<button class="option first" onclick="nextQuestion(1, 'Квартира')">
+								<img class="image" src="./img/1.jpg" alt="Квартира">
+								<p>Квартира</p>
+						</button>
+						<button class="option first" onclick="nextQuestion(1, 'Приватний будинок')">
+								<img class="image" src="./img/2.jpg" alt="Приватний будинок">
+								<p>Приватний будинок</p>
+						</button>
+						<button class="option first" onclick="nextQuestion(1, 'Комерційне приміщення')">
+								<img class="image" src="./img/3.jpg" alt="Комерційне приміщення">
+								<p>Комерційне приміщення</p>
+						</button>
+				</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Финальный экран (скрыт по умолчанию) -->
+	<div class="final-screen" style="display: none;">
+		<div class="chat-message">
+			<div class="avatar operator-avatar">
+				<img src="./img/olga.gif" alt="avatar">
+			</div>
+			<div class="message" id="final-message"></div>
+		</div>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+
+</html>
