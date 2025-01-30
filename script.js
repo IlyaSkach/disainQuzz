@@ -3,7 +3,7 @@ const totalQuestions = 4; // Количество вопросов
 
 const questions = [
     { text: "Виберіть твердження, які відповідають вам", options: ["Красный", "Синий", "Зеленый"] },
-		{ text: "Виберіть твердження, які відповідають вам", options: ["Я дуже мінливий і непередбачуваний. Постійно ризикую і завжди націлений(а) тільки на перемогу", "Я дуже люблю спілкуватися. У колі друзів я вважаюся душею компанії", "Для мене важлива стабільність і безпека", "Я вважаю себе мислячою людиною, яка постійно перебуває в духовному пошуку"] },
+    { text: "Виберіть твердження, які відповідають вам", options: ["Я дуже мінливий і непередбачуваний. Постійно ризикую і завжди націлений(а) тільки на перемогу", "Я дуже люблю спілкуватися. У колі друзів я вважаюся душею компанії", "Для мене важлива стабільність і безпека", "Я вважаю себе мислячою людиною, яка постійно перебуває в духовному пошуку"] },
     { text: "В якому місті знаходитися ваш об'єкт", options: ["Київ", "Дніпро", "Інший"] },
     { text: "Коли можемо організувати зустріч у вас на об'єкті, щоб зробити точні розрахунки і підготувати для вас точну вартість, а також подарувати вам персональну підбірку для натхнення.", options: ["Протягом тижня", "Ще немає обєктаг", "Протягом місяця"] },
     { text: "Какой ваш любимый фильм?", options: ["Титаник", "Матрица", "Интерстеллар"] },
@@ -53,7 +53,7 @@ function nextQuestion(questionNumber, userAnswer) {
         nextQuestion.classList.add("chat-message", "operator");
         nextQuestion.innerHTML = `
             <div class="avatar operator-avatar">
-						<img src="./img/olga.gif" alt="avatar"></div>
+                <img src="./img/olga.gif" alt="avatar"></div>
             <div class="message">${nextQuestionData.text}</div>
             <div class="options">
                 ${nextQuestionData.options.map(option => 
@@ -69,35 +69,16 @@ function nextQuestion(questionNumber, userAnswer) {
         endMessage.classList.add("chat-message", "operator");
         endMessage.innerHTML = `
             <div class="avatar operator-avatar">
-						<img src="./img/olga.gif" alt="avatar"></div>
-            <div class="message">Залиште номер телефону, щоб ми могли з вами організувати зустріч.</div>
+                <img src="./img/olga.gif" alt="avatar"></div>
+            <div class="message">
+                <p>Введіть ваше ім'я:</p>
+                <input type="text" id="user-name" placeholder="Ваше ім'я">
+                <p>Введіть ваш телефон:</p>
+                <input type="tel" id="user-phone" placeholder="+380 (99) 999-99-99" maxlength="17" oninput="formatPhoneNumber(this)">
+                <button class="submit-button" onclick="submitForm()">Відправити</button>
+            </div>
         `;
         document.querySelector(".chat").appendChild(endMessage);
-
-        const nameInput = document.createElement("input");
-        nameInput.setAttribute("type", "text");
-        nameInput.setAttribute("placeholder", "Ваше ім'я");
-        document.querySelector(".chat").appendChild(nameInput);
-
-        const phoneMessage = document.createElement("div");
-        phoneMessage.classList.add("chat-message", "operator");
-        phoneMessage.innerHTML = `
-            <div class="avatar operator-avatar">
-						<img src="./img/olga.gif" alt="avatar"></div>
-            <div class="message">номер телефону:</div>
-        `;
-        document.querySelector(".chat").appendChild(phoneMessage);
-
-        const phoneInput = document.createElement("input");
-        phoneInput.setAttribute("type", "tel");
-        phoneInput.setAttribute("placeholder", "Ваш телефон");
-        document.querySelector(".chat").appendChild(phoneInput);
-
-        const submitButton = document.createElement("button");
-        submitButton.classList.add("submit-button");
-        submitButton.textContent = "Відправити";
-        submitButton.onclick = submitForm;
-        document.querySelector(".chat").appendChild(submitButton);
     }
 
     // Обновляем прогресс-бар
@@ -108,12 +89,33 @@ function nextQuestion(questionNumber, userAnswer) {
     window.scrollTo(0, document.body.scrollHeight);
 }
 
-function submitForm() {
-    const name = document.querySelector("input[type='text']").value;
-    const phone = document.querySelector("input[type='tel']").value;
+function formatPhoneNumber(input) {
+    const value = input.value.replace(/\D/g, '');
+    const formattedValue = '+380 ' + value.substring(3, 5) + ' ' + value.substring(5, 8) + '-' + value.substring(8, 10) + '-' + value.substring(10, 12);
+    input.value = formattedValue.substring(0, 17);
+}
 
-    // Отображаем благодарность
-    document.querySelector('.quiz-screen').style.display = 'none';
-    document.querySelector('.final-screen').style.display = 'block';
-    document.getElementById('final-message').textContent = `Дякую, ${name}! Дані успішно відправлені.`;
+function submitForm() {
+	const name = document.getElementById('user-name').value;
+	const phone = document.getElementById('user-phone').value;
+	const phonePattern = /^\+380\s\d{2}\s\d{3}-\d{2}-\d{2}$/;
+
+	if (!name || !phonePattern.test(phone)) {
+			showPopup("Введіть коректне ім'я та номер телефону.");
+			return;
+	}
+
+	// Отображаем благодарность
+	document.querySelector('.quiz-screen').style.display = 'none';
+	document.querySelector('.final-screen').style.display = 'block';
+	document.getElementById('final-message').innerHTML = `Дякую, ${name}! Дані успішно відправлені. Поки ми з Вами зв'яжемося, можете <a href="https://solle.com.ua/" target="_blank">відвідати наш сайт</a> або <a href="tel:+1234567890">позвонити нам</a>.`;
+}
+
+function showPopup(message) {
+	document.getElementById('popup-message').textContent = message;
+	document.getElementById('popup').style.display = 'block';
+}
+
+function closePopup() {
+	document.getElementById('popup').style.display = 'none';
 }

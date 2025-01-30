@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ua">
 
 <head>
 	<meta charset="UTF-8">
@@ -31,7 +31,7 @@
 			<p class="text-start">Дайте відповідь лише на 5 запитань</p>
 		</div>
 		<img src="./img/home.jpg" alt="img start screen">
-		<button class="start-button" onclick="startQuiz()">Начать квиз</button>
+		<button class="start-button" onclick="startQuiz()">Почати квіз</button>
 	</div>
 
 	<!-- Экран квиза (скрыт по умолчанию) -->
@@ -42,10 +42,10 @@
 			<div class="avatar operator-avatar">
 					<img src="./img/olga.gif" alt="avatar">
 			</div>
-			<button class="call-button" onclick="window.location.href='tel:+1234567890'" style="display: none;">Позвонить</button>
+			<button class="call-button" onclick="window.location.href='https://solle.com.ua/'" style="display: none;">Ольга, архитектор</button>
 	</div>
 	<div class="welcome-text" style="display: none;">
-			Здравствуйте, меня зовут Ольга! Начнем квиз?
+		Здрастуйте, мене звуть Ольга! Почнемо квіз?
 	</div>
 	<div class="progress-bar">
 			<div class="progress"></div>
@@ -78,6 +78,13 @@
 			</div>
 		</main>
 	</div>
+
+	<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close-button" onclick="closePopup()">&times;</span>
+        <p id="popup-message"></p>
+    </div>
+</div>
 
 	<!-- Финальный экран (скрыт по умолчанию) -->
 	<div class="final-screen" style="display: none;">

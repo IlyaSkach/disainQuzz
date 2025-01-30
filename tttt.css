@@ -1,0 +1,56 @@
+@media (max-width: 480px) {
+  .promo {
+    padding: 10px;
+  }
+  .start-screen .start-button {
+    width: 100px;
+    height: 100px;
+    font-size: 16px;
+  }
+
+  .start-screen .start-button::after {
+    font-size: 20px;
+  }
+
+  .welcome-text {
+    text-align: center;
+  }
+
+  .options {
+    text-align: center;
+  }
+}
+@media (max-width: 768px) {
+  .promo {
+    padding: 10px;
+  }
+  .start-screen {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .start-screen .text-container {
+    max-width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .start-screen img {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .start-screen .start-button {
+    position: static;
+    transform: none;
+    margin-top: 20px;
+  }
+  .welcome-text {
+    text-align: center;
+  }
+
+  .options {
+    text-align: center;
+  }
+}
